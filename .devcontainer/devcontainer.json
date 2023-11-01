@@ -14,7 +14,22 @@
 	// "forwardPorts": [3000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm install"
+	"postCreateCommand": "npm install",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"PKief.material-icon-theme",
+				"usernamehw.errorlens",
+				"akamud.vscode-theme-onedark",
+				"dsznajder.es7-react-js-snippets",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-pg",
+				"mtxr.sqltools-driver-sqlite",
+				"cmoog.sqlnotebook",
+				"Prisma.prisma"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
