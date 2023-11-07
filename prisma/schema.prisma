@@ -8,7 +8,7 @@ datasource db {
 }
 
 model articles {
-  urlid             String    @id(map: "primary_key") @db.VarChar(200)
+  urlid             String    @id @db.VarChar(200)
   headline          String?   @db.VarChar(200)
   contents          String?
   authors           String?   @db.VarChar(200)
@@ -17,4 +17,35 @@ model articles {
   imageurl          String?   @db.VarChar(200)
   imagedescription  String?   @db.VarChar(200)
   scrapingtimestamp DateTime? @db.Timestamp(6)
+}
+
+model tweets {
+  id               BigInt    @id @unique(map: "idx_tweet_id")
+  id_str           String?
+  tweet_url        String?
+  publish_date     DateTime? @db.Timestamp(6)
+  tweet_user       String?
+  lang             String?
+  rawcontent       String?
+  replycount       Decimal?  @db.Decimal
+  retweetcount     Decimal?  @db.Decimal
+  likecount        Decimal?  @db.Decimal
+  quotecount       Decimal?  @db.Decimal
+  conversationid   String?
+  hashtags         String?
+  cashtags         String?
+  mentionedusers   String?
+  links            String?
+  viewcount        Decimal?  @db.Decimal
+  retweetedtweet   String?
+  quotedtweet      String?
+  place            String?
+  coordinates      String?
+  inreplytotweetid String?
+  inreplytouser    String?
+  source           String?
+  sourceurl        String?
+  sourcelabel      String?
+  media            String?
+  type             String?   @map("_type")
 }
