@@ -1,21 +1,13 @@
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import React from 'react'
+import { db } from '~/server/db'
 
-const tweets = [
-  {
-    "body": "Lorem hello ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores ",
-    "published": "",
-  },
-  {
-    "body": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores ",
-    "published": "",
-  },
-]
+const NewsTab = async () => {
+  const articles = await db.articles.findMany()
 
-const NewsTab = () => {
   return (
     <Grid container spacing={2}>
-      {tweets.concat(tweets).concat(tweets).concat(tweets).concat(tweets).map((tweet, index) => (
+      {articles.map((myArticle, index) => (
         <Grid item key={index} xs={6}>
           <Card>
             <CardActionArea>
@@ -27,7 +19,7 @@ const NewsTab = () => {
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {tweet.body}
+                  {myArticle?.imageurl ?? "no content"}
                 </Typography>
               </CardContent>
             </CardActionArea>

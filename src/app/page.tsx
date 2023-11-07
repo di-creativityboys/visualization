@@ -7,10 +7,10 @@ import GenerateTab from "./components/generate_tab";
 
 
 export default function Home() {
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={3}>
-        {/* Settings */}
         <SocialTab />
       </Grid>
       <Grid item xs={6}>

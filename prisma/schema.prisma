@@ -1,20 +1,20 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+model articles {
+  urlid             String    @id(map: "primary_key") @db.VarChar(200)
+  headline          String?   @db.VarChar(200)
+  contents          String?
+  authors           String?   @db.VarChar(200)
+  uploaddate        DateTime? @db.Date
+  readtime          Int?
+  imageurl          String?   @db.VarChar(200)
+  imagedescription  String?   @db.VarChar(200)
+  scrapingtimestamp DateTime? @db.Timestamp(6)
 }
