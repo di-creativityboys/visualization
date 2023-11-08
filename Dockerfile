@@ -1,7 +1,7 @@
 ##### DEPENDENCIES
 
 FROM --platform=linux/amd64 node:16-alpine3.17 AS deps
-RUN apk add --no-cache libc6-compat openssl1.1-compat
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Install Prisma Client - remove if not using Prisma
@@ -29,6 +29,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
 
 RUN \
  if [ -f yarn.lock ]; then SKIP_ENV_VALIDATION=1 yarn build; \
@@ -43,8 +44,8 @@ FROM --platform=linux/amd64 node:16-alpine3.17 AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

@@ -8,15 +8,15 @@ datasource db {
 }
 
 model articles {
-  urlid             String    @id @db.VarChar(200)
-  headline          String?   @db.VarChar(200)
+  urlid             String  @id
+  headline          String?
   contents          String?
-  authors           String?   @db.VarChar(200)
-  uploaddate        DateTime? @db.Date
+  authors           String?
+  uploaddate        String?
   readtime          Int?
-  imageurl          String?   @db.VarChar(200)
-  imagedescription  String?   @db.VarChar(200)
-  scrapingtimestamp DateTime? @db.Timestamp(6)
+  imageurl          String?
+  imagedescription  String?
+  scrapingtimestamp String?
 }
 
 model tweets {

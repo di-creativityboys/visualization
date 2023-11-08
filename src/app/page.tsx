@@ -5,6 +5,7 @@ import SocialTab from "./components/social_tab";
 import NewsTab from "./components/news_tab";
 import GenerateTab from "./components/generate_tab";
 
+export const dynamic = "force-dynamic"
 
 export default function Home() {
 

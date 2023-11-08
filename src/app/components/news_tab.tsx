@@ -2,7 +2,10 @@ import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '
 import React from 'react'
 import { db } from '~/server/db'
 
-const NewsTab = async () => {
+export const dynamic = "force-dynamic"
+
+
+export default async function NewsTab() {
   const articles = await db.articles.findMany()
 
   return (
@@ -19,7 +22,7 @@ const NewsTab = async () => {
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {myArticle?.imageurl ?? "no content"}
+                  {myArticle?.headline ?? "no content"}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -29,5 +32,3 @@ const NewsTab = async () => {
     </Grid>
   )
 }
-
-export default NewsTab
