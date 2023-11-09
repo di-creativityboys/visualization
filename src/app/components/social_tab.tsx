@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActionArea, CardContent, Divider, Stack, TextField, Typography } from '@mui/material'
+import { Avatar, Button, Card, CardActionArea, CardContent, Divider, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
 
 const tweets = [
@@ -14,17 +14,17 @@ const tweets = [
 
 const SocialTab = () => {
   return (
-    <Stack spacing={1} sx={{ py: 1 }}>
+    <Stack spacing={1} sx={{px: 1}}>
       <Stack direction="row"
         justifyContent="flex-start"
         alignItems="center"
-        spacing={2}
-        sx={{ p: 1 }}>
+        spacing={2}>
         <Avatar alt="Remy Sharp" src="images/woman.jpg"></Avatar>
-        <TextField id="outlined-basic" label="Twitter Username" variant="outlined" />
+        <TextField id="outlined-basic" label="Twitter Username" variant="outlined" sx={{flexGrow: 1}}/>
       </Stack>
+      <Button variant="contained">Scrape Tweets</Button>
       <Divider />
-      <Stack spacing={1} sx={{ p: 1 }}>
+      <Stack spacing={1} sx={{ pl: 4 }}>
         {tweets.map((tweet, index) => (
           <Card key={index} sx={{ minWidth: 275 }}>
             <CardActionArea>

@@ -1,9 +1,11 @@
-import { Button } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import React from 'react'
 
 const GenerateTab = () => {
   return (
-    <Button variant="contained">Generate</Button>
+    <Stack spacing={1} sx={{px: 1}}>
+      <Button variant="contained" color='secondary'>Generate</Button>
+    </Stack>
   )
 }
 
