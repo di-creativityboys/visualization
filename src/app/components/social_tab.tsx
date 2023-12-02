@@ -1,5 +1,6 @@
 import { Avatar, Button, Card, CardActionArea, CardContent, Divider, Stack, TextField, Typography } from '@mui/material'
 import React from 'react'
+import TweetList from './social tab/tweet_list'
 
 const tweets = [
   {
@@ -24,6 +25,8 @@ const SocialTab = () => {
       </Stack>
       <Button variant="contained">Scrape Tweets</Button>
       <Divider />
+      <TweetList />
+      {/*
       <Stack spacing={1} sx={{ pl: 4 }}>
         {tweets.map((tweet, index) => (
           <Card key={index} sx={{ minWidth: 275 }}>
@@ -36,7 +39,7 @@ const SocialTab = () => {
             </CardActionArea>
           </Card>
         ))}
-      </Stack>
+        </Stack>**/}
     </Stack>
   )
 }

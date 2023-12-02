@@ -16,6 +16,8 @@ model articles {
   imageurl          String?
   imagedescription  String?
   scrapingtimestamp DateTime  @db.Timestamp(6)
+  source            String?
+  topic             String?
 }
 
 model tweets {

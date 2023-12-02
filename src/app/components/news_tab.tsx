@@ -3,7 +3,13 @@ import React from 'react'
 import { db } from '~/server/db'
 
 export default async function NewsTab() {
-  const articles = await db.articles.findMany()
+  const articles = await db.articles.findMany({
+    orderBy: [
+      {
+        uploadtimestamp: 'desc',
+      },
+    ],
+  });
 
   return (
     <Grid container spacing={2}>
@@ -13,27 +19,19 @@ export default async function NewsTab() {
         const timestamp = myArticle.uploadtimestamp?.toISOString() ?? myArticle.scrapingtimestamp.toISOString() + "(scraped)";
         return (
           <Grid item key={index} xs={12}>
-            <Card sx={{ display: 'flex'}} >
-              {/* <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image="/images/woman.jpg"
-                alt="green iguana"
-              />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {myArticle?.headline ?? "no content"}
-                </Typography>
-              </CardContent>
-            </CardActionArea> */}
-              <CardActionArea sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'strecht'}}>
-                <CardMedia
+            <Card sx={{ display: 'flex' }} >
+              <CardActionArea sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'strecht' }}>
+                {myArticle.imageurl != null ? (
+                  <CardMedia
                   component="img"
-                  sx={{ width: 151, height: "100%"}}
-                  image="/images/woman.jpg"
-                  alt="Live from space album cover"
+                  sx={{ width: 151, height: "100%" }}
+                  image={myArticle.imageurl}
+                  alt="Image description"
                 />
+                ) : (
+                  ""
+                )}
+                
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent>
                     <Typography component="div" variant="h5">
@@ -43,7 +41,7 @@ export default async function NewsTab() {
                       {myArticle?.content ?? ""}
                     </Typography>
                     <Typography variant='subtitle2' color="text.secondary">
-                      {timestamp}
+                      {timestamp} from {myArticle?.source ?? ""}
                     </Typography>
                   </CardContent>
                 </Box>

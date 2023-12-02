@@ -18,4 +18,3 @@ VALUES (
     'imagedescription:text',
     '2022-01-01T03:33:31.000Z'
   );
-
