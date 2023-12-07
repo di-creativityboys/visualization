@@ -37,7 +37,7 @@ export default function RootLayout({
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Tweet Recommender
               </Typography>
-              <Button color="inherit">DI Creativity Boys</Button>
+              <Button color="inherit">Data Integration</Button>
             </Toolbar>
           </AppBar>
         </Box>

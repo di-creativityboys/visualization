@@ -1,43 +1,47 @@
 "use client";
 
-import { Checkbox, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import CommentIcon from '@mui/icons-material/Comment';
+import { Checkbox, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React from 'react'
+import { SingletonStorage } from '~/client/SingletonStorage';
 
 interface MyType {
-    value: number;
+    tweetId: number;
     tweetContent: string;
 }
 
-export default function TweetItem({ value, tweetContent }: MyType) {
+export default function TweetItem({ tweetId, tweetContent }: MyType) {
 
-    const [checked, setChecked] = React.useState([0]);
+    const [checked, setChecked] = React.useState(false);
 
-    const handleToggle = (value: number) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
+    const handleToggle = () => () => {
+        const storage = SingletonStorage.getInstance();
+        const tweets = storage.selectedTweets;
+        let newChecked = false;
 
-        if (currentIndex === -1) {
-            newChecked.push(value);
+        if (tweets.has(tweetId)) {
+            tweets.delete(tweetId);
+            newChecked = false;
         } else {
-            newChecked.splice(currentIndex, 1);
+            tweets.add(tweetId);
+            newChecked = true;
         }
 
         setChecked(newChecked);
+        console.log(storage.selectedTweets);
     };
 
-    const labelId = `checkbox-list-label-${value}`;
+    const labelId = `checkbox-list-label-${tweetId}`;
 
     return (
         <ListItem
-            key={value}
+            key={tweetId}
             disablePadding
         >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+            <ListItemButton role={undefined} onClick={handleToggle()} dense>
                 <ListItemIcon>
                     <Checkbox
                         edge="start"
-                        checked={checked.indexOf(value) !== -1}
+                        checked={checked}
                         tabIndex={-1}
                         disableRipple
                         inputProps={{ 'aria-labelledby': labelId }}

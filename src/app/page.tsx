@@ -1,9 +1,9 @@
 import { Grid, } from "@mui/material";
 // import styles from "./index.module.css";
 
-import SocialTab from "./components/social_tab";
+import SocialTab from "./components/social tab/social_tab";
 import NewsTab from "./components/news_tab";
-import GenerateTab from "./components/generate_tab";
+import GenerateTab from "./components/generate_tab/generate_tab";
 
 export const dynamic = "force-dynamic"
 
