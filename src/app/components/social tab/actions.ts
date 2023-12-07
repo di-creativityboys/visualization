@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { SingletonStorage } from "~/client/SingletonStorage";
+import { env } from "~/env.mjs";
 
 export async function createUser(formData: FormData) {
     const schema = z.object({
@@ -17,7 +18,7 @@ export async function createUser(formData: FormData) {
         // host.docker.internal
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const response = await fetch(`http://data-app:5000/twitter/${data.user}`, {
+        const response = await fetch(`${env.DATA_APP_URL}/twitter/${data.user}`, {
             method: "GET",
         })
         SingletonStorage.getInstance().twitterUserName = data.user;

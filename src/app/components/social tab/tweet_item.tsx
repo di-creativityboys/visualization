@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Avatar, Checkbox, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography } from '@mui/material';
 import React from 'react'
 import { SingletonStorage } from '~/client/SingletonStorage';
 
@@ -36,37 +36,53 @@ export default function TweetItem({ tweetId, tweetContent }: MyType) {
         <ListItem
             key={tweetId}
             disablePadding
+            alignItems="flex-start"
+            sx={{
+                backgroundColor: checked ? "#607D8B" : "",
+                transition: "300ms",
+                color: checked ? "white" : ""
+            }}
         >
-            <ListItemButton role={undefined} onClick={handleToggle()} dense>
-                <ListItemIcon>
-                    <Checkbox
-                        edge="start"
-                        checked={checked}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={tweetContent} />
+            <ListItemButton
+                role={undefined}
+                onClick={handleToggle()}
+                dense
+                alignItems='flex-start'
+
+                sx={{}}
+            >
+
+                <ListItemAvatar>
+                    <Avatar src="images/woman.jpg" />
+                </ListItemAvatar>
+                <ListItemText
+                    primary="Brunch this weekend?"
+                    secondary={
+                        <Typography
+                            sx={{ color: checked ? "white" : "", fontSize: "0.8rem" }}>
+                            {tweetContent}
+                        </Typography>}
+                    sx={{
+                        color: checked ? "white" : "",
+                        accentColor: "white",
+                        textDecorationColor: "white"
+                    }}
+
+                />
+                <Checkbox
+                    edge="start"
+                    checked={checked}
+                    tabIndex={-1}
+                    disableRipple
+                    inputProps={{ 'aria-labelledby': labelId }}
+                    sx={{
+                        color: "#009688",
+                        '&.Mui-checked': {
+                            color: "white",
+                        },
+                    }}
+                />
             </ListItemButton>
         </ListItem>
     );
 }
-/*
-secondaryAction={
-                <IconButton edge="end" aria-label="comments">
-                    <CommentIcon />
-                </IconButton>
-            }
-
-<Card key={index} sx={{ minWidth: 275 }}>
-    <CardActionArea>
-        <CardContent>
-        <Typography variant="body2">
-            {tweet.body}
-        </Typography>
-        </CardContent>
-    </CardActionArea>
-</Card>
-
-*/

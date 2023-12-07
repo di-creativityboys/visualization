@@ -17,6 +17,9 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    DATA_APP_URL: z
+      .string()
+      .url()
   },
 
   /**
@@ -37,7 +40,8 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_LLM_WEBSOCKET_URL: process.env.LLM_WEBSOCKET_URL
+    NEXT_PUBLIC_LLM_WEBSOCKET_URL: process.env.LLM_WEBSOCKET_URL,
+    DATA_APP_URL: process.env.DATA_APP_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

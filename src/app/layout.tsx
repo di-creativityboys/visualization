@@ -1,8 +1,8 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,17 +23,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Box sx={{ flexGrow: 1, mb: 1}}>
-          <AppBar position="static">
+          <AppBar position="static" sx={{backgroundColor: "#607D8B"}} >
             <Toolbar>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Tweet Recommender
               </Typography>
