@@ -26,7 +26,8 @@
 				"mtxr.sqltools-driver-pg",
 				"mtxr.sqltools-driver-sqlite",
 				"cmoog.sqlnotebook",
-				"Prisma.prisma"
+				"Prisma.prisma",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}

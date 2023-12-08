@@ -1,3 +1,5 @@
+import { type Tweet } from "../types";
+
 /**
  * The Singleton class defines the `getInstance` method that lets clients access
  * the unique singleton instance.
@@ -5,7 +7,8 @@
 export class SingletonStorage {
     private static instance: SingletonStorage;
 
-    selectedTweets: Set<number>;
+    tweets_downloaded: Set<Tweet>;
+    selectedTweets: Set<Tweet>;
     selectedNews: string;
     twitterUserName: string;
 
@@ -13,12 +16,19 @@ export class SingletonStorage {
      * The Singleton's constructor should always be private to prevent direct
      * construction calls with the `new` operator.
      */
-    private constructor() { 
+    private constructor() {
         this.selectedTweets = new Set();
         this.selectedNews = "";
         this.twitterUserName = "";
+        this.tweets_downloaded = new Set();
 
-        console.log("Storage lebt hier")
+        const isServer = typeof window === "undefined" ? true : false;
+
+        if (isServer) {
+            console.error("Storage executed on server!");
+        } else {
+            console.log("Storage executed on client. Everything is fine.");
+        }
     }
 
     /**
@@ -34,8 +44,6 @@ export class SingletonStorage {
 
         return SingletonStorage.instance;
     }
-
-    
 
     /**
      * Finally, any singleton should define some business logic, which can be

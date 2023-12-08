@@ -1,15 +1,20 @@
 {
-  "sqltools.connections": [
-      {
-          "previewLimit": 50,
-          "server": "localhost",
-          "port": 5432,
-          "driver": "PostgreSQL",
-          "name": "container-postgres",
-          "database": "postgres",
-          "username": "postgres",
-          "password": "postgres"
-      }
-  ],
-  "sqltools.autoConnectTo": "container-postgres",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "container-postgres",
+            "database": "postgres",
+            "username": "postgres",
+            "password": "postgres"
+        }
+    ],
+    "sqltools.autoConnectTo": "container-postgres",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.tabSize": 4,
 }

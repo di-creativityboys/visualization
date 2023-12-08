@@ -26,71 +26,74 @@ let webSocketStateFunction: Function;
 let webSocket: WebSocket;
 
 export const openWebSocket = () => {
-  if (webSocket != null) return;
+    if (webSocket != null) return;
 
-  webSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
+    webSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
 
-  webSocket.onopen = (_) => {
-    console.log('Connected to web socket');
-    webSocketStateFunction(WebSocketState.Ready);
-  }
-  webSocket.onclose = (_) => {
-    console.log('web socket closed');
-    webSocketStateFunction(WebSocketState.Disconnected);
-  }
-  webSocket.onerror = (event) => {
-    console.log('web socket error');
-    console.log(event);
-  }
-  
-  webSocket.onmessage = (event) => {
-    console.log(event);
-  
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const raw: string = event.data;
-  
-    let data;
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      data = JSON.parse(raw);
-    }catch (e) {
-      console.log("message recieving failed");
-      return;
-    }
-  
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const response = data.response;
-  
-    responseFunction(response);
-    webSocketStateFunction(WebSocketState.Ready);
-    
-  }
-}
+    webSocket.onopen = (_) => {
+        console.log("Connected to web socket");
+        webSocketStateFunction(WebSocketState.Ready);
+    };
+    webSocket.onclose = (_) => {
+        console.log("web socket closed");
+        webSocketStateFunction(WebSocketState.Disconnected);
+    };
+    webSocket.onerror = (event) => {
+        console.log("web socket error");
+        console.log(event);
+    };
 
+    webSocket.onmessage = (event) => {
+        console.log(event);
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const raw: string = event.data;
+
+        let data;
+        try {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            data = JSON.parse(raw);
+        } catch (e) {
+            console.log("message recieving failed");
+            return;
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+        const response = data.response;
+
+        responseFunction(response);
+        webSocketStateFunction(WebSocketState.Ready);
+    };
+};
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const registerWebSocketStateFunction = (webSocketStateFunctionP: Function) => {
-  webSocketStateFunction = webSocketStateFunctionP;
-}
+export const registerWebSocketStateFunction = (
+    webSocketStateFunctionP: Function
+) => {
+    webSocketStateFunction = webSocketStateFunctionP;
+};
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const queryLLM = (prompt: string, languageModel: LanguageModel, responseFunc: Function) => {
-  responseFunction = responseFunc;
-  webSocketStateFunction(WebSocketState.Calculating);
+export const queryLLM = (
+    prompt: string,
+    languageModel: LanguageModel,
+    responseFunc: Function
+) => {
+    responseFunction = responseFunc;
+    webSocketStateFunction(WebSocketState.Calculating);
 
-  const template = {
-    "task": "plain",
-    "options": {
-      "prompt": prompt,
-      "model": languageModel,
-    }
-  }
+    const template = {
+        task: "plain",
+        options: {
+            prompt: prompt,
+            model: languageModel,
+        },
+    };
 
-  const query = JSON.stringify(template);
+    const query = JSON.stringify(template);
 
-  webSocket.send(query);
+    webSocket.send(query);
 
-  console.log("websocket query sent!");
-  console.log(query);
-}
+    console.log("websocket query sent!");
+    console.log(query);
+};

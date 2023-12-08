@@ -1,13 +1,12 @@
 "use client";
 
-import React from 'react'
-import { useFormStatus } from 'react-dom';
-import { createUser } from './actions';
-import { CircularProgress } from '@mui/material';
-import { SingletonStorage } from '~/client/SingletonStorage';
+import React from "react";
+import { useFormStatus } from "react-dom";
+import { createUser } from "./actions";
+import { CircularProgress } from "@mui/material";
+import { SingletonStorage } from "~/client/SingletonStorage";
 
 export const UserSelectForm = () => {
-
     return (
         <form action={createUser}>
             <label htmlFor="user">Enter Username</label>
@@ -15,32 +14,30 @@ export const UserSelectForm = () => {
                 type="text"
                 id="user"
                 name="user"
-                required 
+                required
                 //value={username}
                 onChange={(e) => {
-                    SingletonStorage.getInstance().twitterUserName = e.target.value;
-                    console.log(SingletonStorage.getInstance().twitterUserName)
+                    SingletonStorage.getInstance().twitterUserName =
+                        e.target.value;
+                    console.log(SingletonStorage.getInstance().twitterUserName);
                 }}
-                />
+            />
             <SubmitButton />
         </form>
-    )
-}
+    );
+};
 
 export function SubmitButton() {
     const { pending } = useFormStatus();
 
     return (
         <>
-            <button type="submit" aria-disabled={pending} disabled={pending} >
+            <button type="submit" aria-disabled={pending} disabled={pending}>
                 Add
             </button>
-            {pending
-                ? <CircularProgress />
-                : <span></span>
-            }
+            {pending ? <CircularProgress /> : <span></span>}
         </>
-    )
+    );
 }
 
 /*
