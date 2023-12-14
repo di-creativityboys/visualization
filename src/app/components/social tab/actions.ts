@@ -2,10 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { SingletonStorage } from "~/client/SingletonStorage";
 import { env } from "~/env.mjs";
+import { singletonServer } from "~/server/SingletonServer";
 
-export async function createUser(formData: FormData) {
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function getCachedUser(formData: FormData) {
+    "use server";
+
     const schema = z.object({
         user: z.string(),
     });
@@ -13,6 +16,25 @@ export async function createUser(formData: FormData) {
     const data = schema.parse({
         user: formData.get("user"),
     });
+
+    singletonServer.twitterUserName = data.user;
+    console.log("1 " + singletonServer.twitterUserName);
+    revalidatePath("/");
+}
+
+export async function fetchUser(formData: FormData) {
+    "use server";
+
+    const schema = z.object({
+        user: z.string(),
+    });
+
+    const data = schema.parse({
+        user: formData.get("user"),
+    });
+
+    singletonServer.twitterUserName = data.user;
+    console.log("1 " + singletonServer.twitterUserName);
 
     try {
         // host.docker.internal
@@ -24,9 +46,6 @@ export async function createUser(formData: FormData) {
                 method: "GET",
             }
         );
-        SingletonStorage.getInstance().twitterUserName = data.user;
-        console.log(data.user);
-        console.log(SingletonStorage.getInstance().twitterUserName);
 
         revalidatePath("/");
         console.log("geschafft");

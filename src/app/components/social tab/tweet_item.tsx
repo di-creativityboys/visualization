@@ -13,11 +13,11 @@ import React from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
 import { type Tweet } from "~/types";
 
-interface MyType {
+interface TweetItemProps {
     tweet: Tweet;
 }
 
-export default function TweetItem({ tweet }: MyType) {
+export default function TweetItem({ tweet }: TweetItemProps) {
     const [checked, setChecked] = React.useState(false);
 
     const handleToggle = () => () => {

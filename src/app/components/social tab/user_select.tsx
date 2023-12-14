@@ -2,28 +2,35 @@
 
 import React from "react";
 import { useFormStatus } from "react-dom";
-import { createUser } from "./actions";
+import { getCachedUser } from "./actions";
 import { CircularProgress } from "@mui/material";
 import { SingletonStorage } from "~/client/SingletonStorage";
+import { UserFetchForm } from "./user_fetch";
 
 export const UserSelectForm = () => {
     return (
-        <form action={createUser}>
-            <label htmlFor="user">Enter Username</label>
-            <input
-                type="text"
-                id="user"
-                name="user"
-                required
-                //value={username}
-                onChange={(e) => {
-                    SingletonStorage.getInstance().twitterUserName =
-                        e.target.value;
-                    console.log(SingletonStorage.getInstance().twitterUserName);
-                }}
-            />
-            <SubmitButton />
-        </form>
+        <>
+            <form action={getCachedUser}>
+                <label htmlFor="user">Enter Username</label>
+                <input
+                    
+                    type="text"
+                    id="user"
+                    name="user"
+                    required
+                    //value={username}
+                    onChange={(e) => {
+                        SingletonStorage.getInstance().twitterUserName =
+                            e.target.value;
+                        console.log(
+                            SingletonStorage.getInstance().twitterUserName
+                        );
+                    }}
+                />
+                <SubmitButton />
+            </form>
+            <UserFetchForm />
+        </>
     );
 };
 
@@ -33,7 +40,7 @@ export function SubmitButton() {
     return (
         <>
             <button type="submit" aria-disabled={pending} disabled={pending}>
-                Add
+                Get cached user
             </button>
             {pending ? <CircularProgress /> : <span></span>}
         </>

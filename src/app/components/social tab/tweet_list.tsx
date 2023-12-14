@@ -3,16 +3,17 @@ import React from "react";
 import { db } from "~/server/db";
 import TweetItem from "./tweet_item";
 import { type Tweet } from "~/types";
+import { singletonServer } from "~/server/SingletonServer";
+
 
 export const TweetList = async () => {
-    console.log("in tweet list");
-    //console.log(SingletonStorage.getInstance().twitterUserName);
+    console.log("2 " + singletonServer.twitterUserName);
     const tweets = await db.tweets.findMany({
-        // where: {
-        //   tweetuser: {
-        //     equals: SingletonStorage.getInstance().twitterUserName,
-        //   }
-        // },
+        where: {
+          tweetuser: {
+            equals: singletonServer.twitterUserName,
+          }
+        },
         orderBy: [
             {
                 publishdatetime: "desc",

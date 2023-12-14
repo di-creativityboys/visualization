@@ -1,19 +1,17 @@
-"use client";
+import { env } from "~/env.mjs";
 
-import { type Tweet } from "../types";
+
+
+
 
 /**
  * The Singleton class defines the `getInstance` method that lets clients access
  * the unique singleton instance.
  */
-export class SingletonStorage {
+export class SingletonServer {
     
 
-    private static instance: SingletonStorage;
-
-    tweets_downloaded: Set<Tweet>;
-    selectedTweets: Set<Tweet>;
-    selectedNews: string;
+    private static instance: SingletonServer;
     twitterUserName: string;
 
     /**
@@ -21,17 +19,14 @@ export class SingletonStorage {
      * construction calls with the `new` operator.
      */
     private constructor() {
-        this.selectedTweets = new Set();
-        this.selectedNews = "";
         this.twitterUserName = "";
-        this.tweets_downloaded = new Set();
 
         const isServer = typeof window === "undefined" ? true : false;
 
         if (isServer) {
-            console.error("Storage executed on server!");
+            console.log("Storage executed on server, everything is fine.");
         } else {
-            console.log("Storage executed on client. Everything is fine.");
+            console.error("Executed on client!!!!!")
         }
     }
 
@@ -41,12 +36,12 @@ export class SingletonStorage {
      * This implementation let you subclass the Singleton class while keeping
      * just one instance of each subclass around.
      */
-    public static getInstance(): SingletonStorage {
-        if (!SingletonStorage.instance) {
-            SingletonStorage.instance = new SingletonStorage();
+    public static getInstance(): SingletonServer {
+        if (!SingletonServer.instance) {
+            SingletonServer.instance = new SingletonServer();
         }
 
-        return SingletonStorage.instance;
+        return SingletonServer.instance;
     }
 
     /**
@@ -57,3 +52,14 @@ export class SingletonStorage {
         // ...
     }
 }
+
+
+const globalForSingletonServer = globalThis as unknown as {
+    singletonServer: SingletonServer | undefined;
+};
+
+export const singletonServer =
+    globalForSingletonServer.singletonServer ??
+    SingletonServer.getInstance()
+
+if (env.NODE_ENV !== "production") globalForSingletonServer.singletonServer = singletonServer;
