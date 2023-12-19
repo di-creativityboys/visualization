@@ -1,6 +1,6 @@
 "use client";
 
-import { type Tweet } from "../types";
+import { type Prompt, type Tweet } from "../types";
 
 /**
  * The Singleton class defines the `getInstance` method that lets clients access
@@ -15,6 +15,7 @@ export class SingletonStorage {
     selectedTweets: Set<Tweet>;
     selectedNews: string;
     twitterUserName: string;
+    prompt: Prompt;
 
     /**
      * The Singleton's constructor should always be private to prevent direct
@@ -25,6 +26,7 @@ export class SingletonStorage {
         this.selectedNews = "";
         this.twitterUserName = "";
         this.tweets_downloaded = new Set();
+        this.prompt = {text0: "", text1: "", text2: "", news: "", tweet: ""}
 
         const isServer = typeof window === "undefined" ? true : false;
 

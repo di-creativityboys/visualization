@@ -4,10 +4,12 @@ import { Grid } from "@mui/material";
 import SocialTab from "./components/social tab/social_tab";
 import NewsTab from "./components/news_tab";
 import GenerateTab from "./components/generate_tab/generate_tab";
+import ControlledAccordions from "./components/generate_tab/generate_new";
 
 export const dynamic = "force-dynamic";
 
 export default function Home() {
+
     return (
         <>
             <Grid container spacing={2}>
@@ -18,7 +20,8 @@ export default function Home() {
                     {/* <NewsTab /> */}
                 </Grid>
                 <Grid item xs={3}>
-                    <GenerateTab />
+                    {/* <GenerateTab /> */}
+                    <ControlledAccordions />
                 </Grid>
             </Grid>
         </>
