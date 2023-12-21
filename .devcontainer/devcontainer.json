@@ -27,7 +27,8 @@
 				"mtxr.sqltools-driver-sqlite",
 				"cmoog.sqlnotebook",
 				"Prisma.prisma",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"IgorSbitnev.error-gutters"
 			]
 		}
 	}
