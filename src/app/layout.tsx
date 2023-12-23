@@ -21,7 +21,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Box sx={{ flexGrow: 1, mb: 1 }}>
+                <Box sx={{ flexGrow: 1}}>
                     <AppBar
                         position="static"
                         sx={{ backgroundColor: "#607D8B" }}

@@ -21,7 +21,7 @@ export const TweetList = async () => {
     });
 
     return (
-        <Paper style={{ maxHeight: "85vh", overflow: "auto" }}>
+        <Paper style={{ maxHeight: "80vh", overflow: "auto" }}>
             <List sx={{ width: "100%" }}>
                 {tweets.map((tweetData) => {
                     const tweet: Tweet = tweetData;

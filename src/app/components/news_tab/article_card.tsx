@@ -48,13 +48,6 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
                         <Typography component="div" variant="h5">
                             {article.headline ?? ""}
                         </Typography>
-                        <Typography
-                            variant="subtitle1"
-                            color="text.secondary"
-                            component="div"
-                        >
-                            {/* {article.content ?? ""} */}
-                        </Typography>
                         <Typography variant="subtitle2" color="text.secondary">
                             {timestamp} from {article.source ?? ""}
                         </Typography>

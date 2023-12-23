@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mt={1} alignItems="stretch">
             <Grid item xs={3}>
                 <SocialTab />
             </Grid>
