@@ -18,6 +18,8 @@ model articles {
   scrapingtimestamp DateTime  @db.Timestamp(6)
   source            String?
   topic             String?
+  clusterid         Int?
+  clustertopic      String?
 }
 
 model tweets {
@@ -36,11 +38,24 @@ model tweets {
   mentionedusers    String[]  @db.VarChar
   linksintweet      String[]  @db.VarChar
   viewcount         Int?
-  retweetedtweetid  BigInt?
-  quotedtweetid     BigInt?
+  retweetedtweetid  String?
+  quotedtweetid     String?
   inreplytouser     String?   @db.VarChar
   photolinks        String[]  @db.VarChar
   videolinks        String[]  @db.VarChar
   animatedlinks     String[]  @db.VarChar
+  scrapingtimestamp DateTime  @db.Timestamp(6)
+  clusterid         Int?
+  clustertopic      String?
+}
+
+model tweetsnew {
+  rawcontent        String    @id
+  publishdatetime   DateTime? @db.Timestamp(6)
+  tweetuser         String?   @db.VarChar
+  replycount        Int?
+  retweetcount      Int?
+  likecount         Int?
+  profilimage       String?
   scrapingtimestamp DateTime  @db.Timestamp(6)
 }

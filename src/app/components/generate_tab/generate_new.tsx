@@ -14,7 +14,7 @@ import { OutputTab } from "./output/output_tab";
 export default function ControlledAccordions() {
     const [promptPreview, setPromptPreview] = useState("");
 
-    const [expanded, setExpanded] = React.useState<string | false>(false);
+    const [expanded, setExpanded] = React.useState<string | false>("promptPanel");
 
     const handleChange =
         (panel: string) =>

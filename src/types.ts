@@ -4,6 +4,21 @@ export type Tweet = {
     publishdatetime: Date | null;
 };
 
+export type Article = {
+    urlid: string;
+    headline: string | null;
+    content: string | null;
+    authors: string[];
+    uploadtimestamp: Date | null;
+    imageurl: string | null;
+    imagedescription: string | null;
+    scrapingtimestamp: Date;
+    source: string | null;
+    topic: string | null;
+    clusterid: number | null;
+    clustertopic: string | null;
+}
+
 export type Prompt = {
     text0: string;
     text1: string;

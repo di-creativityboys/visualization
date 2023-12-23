@@ -18,10 +18,12 @@ interface TweetItemProps {
 }
 
 export default function TweetItem({ tweet }: TweetItemProps) {
-    const [checked, setChecked] = React.useState(false);
+    const storage = SingletonStorage.getInstance();
+
+    const [checked, setChecked] = React.useState(storage.selectedTweets.has(tweet));
 
     const handleToggle = () => () => {
-        const storage = SingletonStorage.getInstance();
+        
         const tweets = storage.selectedTweets;
         let newChecked = false;
 

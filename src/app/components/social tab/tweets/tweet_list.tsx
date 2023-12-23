@@ -7,7 +7,6 @@ import { singletonServer } from "~/server/SingletonServer";
 
 
 export const TweetList = async () => {
-    console.log("2 " + singletonServer.twitterUserName);
     const tweets = await db.tweets.findMany({
         where: {
           tweetuser: {

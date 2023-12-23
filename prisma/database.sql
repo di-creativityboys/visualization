@@ -9,8 +9,11 @@ CREATE TABLE IF NOT EXISTS Articles (
     imageDescription text,
     scrapingTimestamp timestamp NOT NULL,
     source text,
-    topic text
+    topic text,
+    clusterId int,
+    clusterTopic text
 );
+
 -- Create Table for scraped Tweets
 CREATE TABLE IF NOT EXISTS Tweets (
     id bigint PRIMARY KEY,
@@ -31,8 +34,8 @@ CREATE TABLE IF NOT EXISTS Tweets (
     -- list of users (interesting?)
     linksInTweet varchar [],
     viewCount int,
-    retweetedTweetId bigint,
-    quotedTweetId bigint,
+    retweetedTweetId text,
+    quotedTweetId text,
     -- ToDo: select id only??? tweet is probably not in our db anyways
     -- place varchar,
     -- coordinates varchar,
@@ -41,5 +44,19 @@ CREATE TABLE IF NOT EXISTS Tweets (
     photoLinks varchar [],
     videoLinks varchar [],
     animatedLinks varchar [],
+    scrapingTimeStamp timestamp NOT NULL,
+    clusterId int,
+    clusterTopic text
+);
+
+
+CREATE TABLE IF NOT EXISTS TweetsNew (
+    rawContent text PRIMARY KEY,
+    publishDatetime timestamp,--should be timestamp later!!!
+    tweetUser varchar,
+    replyCount int,
+    retweetCount int,
+    likeCount int,
+    profilImage text,
     scrapingTimeStamp timestamp NOT NULL
 );
