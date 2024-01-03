@@ -16,6 +16,7 @@ export class SingletonStorage {
     selectedArticle: Article | null;
     twitterUserName: string;
     prompt: Prompt;
+    templateName: string;
 
     /**
      * The Singleton's constructor should always be private to prevent direct
@@ -27,6 +28,7 @@ export class SingletonStorage {
         this.twitterUserName = "";
         this.tweets_downloaded = new Set();
         this.prompt = {text0: "", text1: "", text2: "", news: "", tweets: ""}
+        this.templateName = "";
 
         const isServer = typeof window === "undefined" ? true : false;
 

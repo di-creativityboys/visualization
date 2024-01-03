@@ -28,9 +28,9 @@ export type Prompt = {
 }
 
 export type PromptTemplate = {
-    id: bigint;
+    id: number;
     name: string;
-    text0: string;
-    text1: string;
-    text2: string;
+    text0: string | null;
+    text1: string | null;
+    text2: string | null;
 }

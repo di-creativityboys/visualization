@@ -2,9 +2,9 @@ import { Grid } from "@mui/material";
 // import styles from "./index.module.css";
 
 import SocialTab from "./components/social tab/social_tab";
-import NewsTab from "./components/news_tab/news_tab";
-import ControlledAccordions from "./components/generate_tab/generate_new";
-import { Suspense } from "react";
+// import NewsTab from "./components/news_tab/news_tab";
+// import { Suspense } from "react";
+import RecommendationPage from "./recommendation/recommendation";
 
 export const dynamic = "force-dynamic";
 
@@ -15,12 +15,12 @@ export default function Home() {
                 <SocialTab />
             </Grid>
             <Grid item xs={6}>
-                <Suspense fallback={<div>Loading...</div>}>
+                {/* <Suspense fallback={<div>Loading...</div>}>
                     <NewsTab />
-                </Suspense>
+                </Suspense> */}
             </Grid>
             <Grid item xs={3}>
-                <ControlledAccordions />
+                <RecommendationPage />
             </Grid>
         </Grid>
     );

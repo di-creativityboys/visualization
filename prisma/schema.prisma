@@ -8,7 +8,8 @@ datasource db {
 }
 
 model articles {
-  urlid             String    @id
+  id                Int       @id @default(autoincrement())
+  urlid             String?
   headline          String?
   content           String?
   authors           String[]
@@ -23,7 +24,7 @@ model articles {
 }
 
 model tweets {
-  id                BigInt    @id
+  id                Int       @id @default(autoincrement())
   tweeturl          String?   @db.VarChar
   publishdatetime   DateTime? @db.Timestamp(6)
   tweetuser         String?   @db.VarChar
@@ -45,17 +46,15 @@ model tweets {
   videolinks        String[]  @db.VarChar
   animatedlinks     String[]  @db.VarChar
   scrapingtimestamp DateTime  @db.Timestamp(6)
+  profileimageurl   String?   @db.VarChar
   clusterid         Int?
   clustertopic      String?
 }
 
-model tweetsnew {
-  rawcontent        String    @id
-  publishdatetime   DateTime? @db.Timestamp(6)
-  tweetuser         String?   @db.VarChar
-  replycount        Int?
-  retweetcount      Int?
-  likecount         Int?
-  profilimage       String?
-  scrapingtimestamp DateTime  @db.Timestamp(6)
+model prompttemplate {
+  id    Int     @id @default(autoincrement())
+  name  String? @db.VarChar
+  text0 String? @db.VarChar
+  text1 String? @db.VarChar
+  text2 String? @db.VarChar
 }

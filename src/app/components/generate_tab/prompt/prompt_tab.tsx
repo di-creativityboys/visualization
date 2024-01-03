@@ -3,20 +3,18 @@
 import { Button, Card, Divider, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
-import { PromptTemplateDropDrown } from "./template_dropdown";
 
 export const PromptTab = () => {
     const [text0, setText0] = useState("");
     const [text1, setText1] = useState("");
     const [text2, setText2] = useState("");
-    const [news, setNews] = useState("");
+    const [article, setArticle] = useState("");
     const [tweetString, setTweetString] = useState("");
 
     const clientStorage = SingletonStorage.getInstance();    
 
     return (
         <Stack spacing={1}>
-            <PromptTemplateDropDrown />
             <Button variant="contained" sx={{ backgroundColor: "#009688" }} onClick={() => {
                 const tweets = clientStorage.selectedTweets;
                 let tempString = ""
@@ -28,7 +26,7 @@ export const PromptTab = () => {
                     tempString = tempString.slice(0, -2);
                 }
                 setTweetString(tempString);
-                setNews(clientStorage.selectedNews);
+                setArticle(clientStorage.selectedArticle?.content ?? "");
                 clientStorage.prompt.tweets = tempString;
             }}>
                 Derive prompt
@@ -45,7 +43,7 @@ export const PromptTab = () => {
                     setText0(e.target.value ?? "")
                 }}
             />
-            {news ? <Card>{news}</Card> : <p>No news selected</p>}
+            {article ? <Card>{article}</Card> : <p>No news selected</p>}
 
             <TextField
                 id="outlined-multiline-static"
