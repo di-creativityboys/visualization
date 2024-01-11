@@ -1,11 +1,12 @@
 export type Tweet = {
-    id: bigint;
+    id: number;
     rawcontent: string | null;
     publishdatetime: Date | null;
 };
 
 export type Article = {
-    urlid: string;
+    id: number;
+    urlid: string | null;
     headline: string | null;
     content: string | null;
     authors: string[];

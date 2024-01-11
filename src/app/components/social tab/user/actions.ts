@@ -41,7 +41,7 @@ export async function fetchUser(formData: FormData) {
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const response = await fetch(
-            `${env.DATA_APP_URL}/twitter/${data.user}`,
+            `${env.DATA_APP_URL}/twitter/v2/${data.user}`,
             {
                 method: "GET",
             }

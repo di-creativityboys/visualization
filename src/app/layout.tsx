@@ -1,8 +1,9 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { type ReactNode } from "react";
+// import ApiSwitchLayout from "./components/menu/myLayout";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -12,6 +13,7 @@ export const metadata = {
     title: "Tweet Recommender",
     description: "Data Integration WT2324",
     icons: [{ rel: "icon", url: "/favicon.ico" }],
+    
 };
 
 export default function RootLayout({
@@ -35,7 +37,7 @@ export default function RootLayout({
                             >
                                 Tweet Recommender
                             </Typography>
-                            <Button color="inherit">Data Integration</Button>
+                            {/* <ApiSwitchLayout /> */}
                         </Toolbar>
                     </AppBar>
                 </Box>

@@ -14,9 +14,11 @@ export class SingletonStorage {
     tweets_downloaded: Set<Tweet>;
     selectedTweets: Set<Tweet>;
     selectedArticle: Article | null;
+    selectedTopic: number | null; //topic id
     twitterUserName: string;
     prompt: Prompt;
     templateName: string;
+    apiVersion: number;
 
     /**
      * The Singleton's constructor should always be private to prevent direct
@@ -25,10 +27,12 @@ export class SingletonStorage {
     private constructor() {
         this.selectedTweets = new Set();
         this.selectedArticle = null;
+        this.selectedTopic = null;
         this.twitterUserName = "";
         this.tweets_downloaded = new Set();
         this.prompt = {text0: "", text1: "", text2: "", news: "", tweets: ""}
         this.templateName = "";
+        this.apiVersion = 1;
 
         const isServer = typeof window === "undefined" ? true : false;
 

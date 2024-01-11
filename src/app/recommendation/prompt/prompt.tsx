@@ -62,7 +62,7 @@ export const PromptTab = ({ prompt }: MyProps) => {
                     setText0(e.target.value ?? "");
                 }}
             />
-            {article ? <Card>{article}</Card> : <p>No news selected</p>}
+            {article ? <Card sx={{maxHeight: "80px", overflow: "auto"}}>{article}</Card> : <p>No news selected</p>}
 
             <TextField
                 id="outlined-multiline-static"
