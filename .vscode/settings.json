@@ -5,4 +5,6 @@
     },
     "editor.tabSize": 4,
     "files.autoSaveDelay": 1500,
+    // maybe deactive
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

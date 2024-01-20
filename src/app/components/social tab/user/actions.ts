@@ -27,10 +27,12 @@ export async function fetchUser(formData: FormData) {
 
     const schema = z.object({
         user: z.string(),
+        apiVersion: z.string(),
     });
 
     const data = schema.parse({
         user: formData.get("user"),
+        apiVersion: formData.get("apiVersion"),
     });
 
     singletonServer.twitterUserName = data.user;
@@ -39,13 +41,25 @@ export async function fetchUser(formData: FormData) {
     try {
         // host.docker.internal
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const response = await fetch(
-            `${env.DATA_APP_URL}/twitter/v2/${data.user}`,
-            {
-                method: "GET",
-            }
-        );
+        if(data.apiVersion === "1") {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const response = await fetch(
+                `${env.DATA_APP_URL}/twitter/${data.user}`,
+                {
+                    method: "GET",
+                }
+            );
+        } else {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const response = await fetch(
+                `${env.DATA_APP_URL}/twitter/v2/${data.user}`,
+                {
+                    method: "GET",
+                }
+            );
+        }
+
+        
 
         revalidatePath("/");
         console.log("geschafft");

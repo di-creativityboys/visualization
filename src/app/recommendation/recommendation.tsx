@@ -1,6 +1,6 @@
 import { db } from "~/server/db";
 import RecommendationLayout from "./my_layout";
-import { type PromptTemplate } from "~/types";
+import { type prompttemplate as PromptTemplate } from "@prisma/client";
 
 export default async function RecommendationPage() {
     const promptTemplatesDb = await db.prompttemplate.findMany({

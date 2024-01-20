@@ -3,7 +3,7 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { type ReactNode } from "react";
-// import ApiSwitchLayout from "./components/menu/myLayout";
+import ApiSwitchLayout from "./components/menu/myLayout";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function RootLayout({
                             >
                                 Tweet Recommender
                             </Typography>
-                            {/* <ApiSwitchLayout /> */}
+                            <ApiSwitchLayout />
                         </Toolbar>
                     </AppBar>
                 </Box>

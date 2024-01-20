@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
-import { type Article } from "~/types";
+import { type articles as Article } from "@prisma/client";
 
 type ArticleCardProps = {
     article: Article;
@@ -16,15 +16,25 @@ type ArticleCardProps = {
     setActiveCard: (newValue: number) => void;
 };
 
-export const ArticleCard = ({ article, activeCard, setActiveCard }: ArticleCardProps) => {
+export const ArticleCard = ({
+    article,
+    activeCard,
+    setActiveCard,
+}: ArticleCardProps) => {
     const isActiveCard = activeCard == article.id;
-    
+
     const timestamp =
         article.uploadtimestamp?.toISOString() ??
         article.scrapingtimestamp.toISOString() + "(scraped)";
 
     return (
-        <Card sx={{ display: "flex", maxHeight: "10vh", backgroundColor: isActiveCard ? "#aaa" : null }}>
+        <Card
+            sx={{
+                display: "flex",
+                maxHeight: "10vh",
+                backgroundColor: isActiveCard ? "#aaa" : null,
+            }}
+        >
             <CardActionArea
                 onClick={(_) => {
                     setActiveCard(article.id);

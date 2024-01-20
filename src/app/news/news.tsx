@@ -1,6 +1,6 @@
 import { db } from "~/server/db";
 import NewsLayout from "./my_layout";
-import { type Article } from "~/types";
+import { type articles as Article } from "@prisma/client"
 
 export default async function NewsPage() {
     const articlesDB = await db.articles.findMany({

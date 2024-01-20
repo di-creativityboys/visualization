@@ -1,6 +1,7 @@
 "use client";
 
-import { type Article, type Prompt, type Tweet } from "../types";
+import { type articles as Article, type tweets as Tweet } from "@prisma/client"
+import { type Prompt } from "../types";
 
 /**
  * The Singleton class defines the `getInstance` method that lets clients access

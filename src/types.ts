@@ -1,37 +1,18 @@
-export type Tweet = {
-    id: number;
-    rawcontent: string | null;
-    publishdatetime: Date | null;
-};
-
-export type Article = {
-    id: number;
-    urlid: string | null;
-    headline: string | null;
-    content: string | null;
-    authors: string[];
-    uploadtimestamp: Date | null;
-    imageurl: string | null;
-    imagedescription: string | null;
-    scrapingtimestamp: Date;
-    source: string | null;
-    topic: string | null;
-    clusterid: number | null;
-    clustertopic: string | null;
-}
-
 export type Prompt = {
     text0: string;
     text1: string;
     text2: string;
     news: string;
     tweets: string;
+};
+
+export enum WebSocketState {
+    Ready,
+    Calculating,
+    Disconnected,
 }
 
-export type PromptTemplate = {
-    id: number;
-    name: string;
-    text0: string | null;
-    text1: string | null;
-    text2: string | null;
+export enum LanguageModel {
+    llama_7b_chat = "llama_7b_chat",
+    llama_13b_chat = "llama_13b_chat",
 }

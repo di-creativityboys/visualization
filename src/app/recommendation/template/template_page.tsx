@@ -1,4 +1,4 @@
-import { type PromptTemplate } from "~/types";
+import { type prompttemplate as PromptTemplate } from "@prisma/client"
 import {
     FormControl,
     InputLabel,

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
-import { type Tweet } from "~/types";
+import { type tweets as Tweet } from "@prisma/client";
 
 interface TweetItemProps {
     tweet: Tweet;
@@ -20,10 +20,11 @@ interface TweetItemProps {
 export default function TweetItem({ tweet }: TweetItemProps) {
     const storage = SingletonStorage.getInstance();
 
-    const [checked, setChecked] = React.useState(storage.selectedTweets.has(tweet));
+    const [checked, setChecked] = React.useState(
+        storage.selectedTweets.has(tweet)
+    );
 
     const handleToggle = () => () => {
-        
         const tweets = storage.selectedTweets;
         let newChecked = false;
 
@@ -60,10 +61,10 @@ export default function TweetItem({ tweet }: TweetItemProps) {
                 sx={{}}
             >
                 <ListItemAvatar>
-                    <Avatar src="images/woman.jpg" />
+                    <Avatar src={tweet.profileimageurl ?? undefined} />
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Brunch this weekend?"
+                    primary={tweet.tweetuser}
                     secondary={
                         <Typography
                             sx={{

@@ -2,16 +2,15 @@ import { List, Paper } from "@mui/material";
 import React from "react";
 import { db } from "~/server/db";
 import TweetItem from "./tweet_item";
-import { type Tweet } from "~/types";
+import { type tweets as Tweet } from "@prisma/client";
 import { singletonServer } from "~/server/SingletonServer";
-
 
 export const TweetList = async () => {
     const tweets = await db.tweets.findMany({
         where: {
-          tweetuser: {
-            equals: singletonServer.twitterUserName,
-          }
+            tweetuser: {
+                equals: singletonServer.twitterUserName,
+            },
         },
         orderBy: [
             {
@@ -26,9 +25,7 @@ export const TweetList = async () => {
                 {tweets.map((tweetData) => {
                     const tweet: Tweet = tweetData;
 
-                    return (
-                        <TweetItem key={tweet.id} tweet={tweet} />
-                    );
+                    return <TweetItem key={tweet.id} tweet={tweet} />;
                 })}
             </List>
         </Paper>

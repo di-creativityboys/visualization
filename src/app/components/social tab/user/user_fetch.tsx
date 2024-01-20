@@ -4,12 +4,16 @@ import React from "react";
 import { useFormStatus } from "react-dom";
 import { fetchUser } from "./actions";
 import { Button, CircularProgress } from "@mui/material";
+import { useMyClientStore } from "~/client/client_store";
 
 type UserFetchProps = {
     username: string;
 };
 
 export const UserFetch = ({ username }: UserFetchProps) => {
+
+    const apiVersion = useMyClientStore((state) => state.apiVersion);
+
     return (
         <form action={fetchUser} style={{width: "50%"}}>
             <input
@@ -18,6 +22,13 @@ export const UserFetch = ({ username }: UserFetchProps) => {
                 name="user"
                 readOnly
                 value={username}
+            />
+            <input
+                style={{ display: "none" }}
+                type="number"
+                name="apiVersion"
+                readOnly
+                value={apiVersion}
             />
             <SubmitButtonFetch />
         </form>

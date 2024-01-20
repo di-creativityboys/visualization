@@ -1,66 +1,44 @@
-"use client";
-
 import {
     Button,
     CircularProgress,
     FormControl,
     InputLabel,
-    MenuItem,
     Select,
     Stack,
     TextField,
+    MenuItem,
 } from "@mui/material";
-import React, { useState } from "react";
-import { openWebSocket, queryLLM, registerWebSocketStateFunction } from "./llm";
+import { useState } from "react";
+import { openWebSocket, queryLLM } from "./llm";
+import { SingletonStorage } from "~/client/SingletonStorage";
+import { LanguageModel, WebSocketState } from "~/types";
+import { useWebSocketStore } from "~/client/client_store";
+import { PingLLMServerPage } from "./ping_llm_server_page";
 
-export enum WebSocketState {
-    Ready,
-    Calculating,
-    Disconnected,
-}
+export const OutputTab = () => {
+    const response = useWebSocketStore((state) => state.response);
+    const webSocketState = useWebSocketStore((state) => state.websocket_state);
 
-export enum LanguageModel {
-    llama_7b_chat = "llama_7b_chat",
-    llama_13b_chat = "llama_13b_chat",
-}
-
-const GenerateTab = () => {
-    const [prompt, setPrompt] = useState("");
-    const [output, setOutput] = useState("");
-    const [webSocketState, setWebSocketState] = useState(
-        WebSocketState.Disconnected
-    );
     const [languageModel, setLanguageModel] = useState(
         LanguageModel.llama_7b_chat
     );
 
-    function responseFunction(response: string) {
-        console.log("RESPONSE!");
-        setOutput(response);
-    }
-
     function recommend() {
-        queryLLM(prompt, languageModel, responseFunction);
+        const prompt =
+            (SingletonStorage.getInstance().prompt.text0 ?? "") +
+            (SingletonStorage.getInstance().prompt.news ?? "") +
+            (SingletonStorage.getInstance().prompt.text1 ?? "") +
+            (SingletonStorage.getInstance().prompt.tweets ?? "") +
+            (SingletonStorage.getInstance().prompt.text2 ?? "");
 
-        return;
+        queryLLM({ prompt, languageModel });
     }
 
-    registerWebSocketStateFunction(setWebSocketState);
     openWebSocket();
 
     return (
-        <Stack spacing={1} sx={{ px: 1 }}>
-            <Button variant="contained" sx={{ backgroundColor: "#009688" }}>
-                Derive prompt
-            </Button>
-            <TextField
-                id="outlined-multiline-static"
-                label="Prompt"
-                multiline
-                rows={12}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value ?? "")}
-            />
+        <Stack spacing={1}>
+            <PingLLMServerPage />
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
                     Language Model
@@ -106,13 +84,15 @@ const GenerateTab = () => {
                 label="Your Tweet"
                 multiline
                 rows={10}
-                value={output}
+                value={response}
             />
-            <Button variant="contained" sx={{ backgroundColor: "#009688" }}>
+            <Button
+                variant="contained"
+                disabled={true}
+                sx={{ backgroundColor: "#009688" }}
+            >
                 Post to X
             </Button>
         </Stack>
     );
 };
-
-export default GenerateTab;

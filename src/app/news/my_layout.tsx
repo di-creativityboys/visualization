@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { type Article } from "~/types";
+import { type articles as Article } from "@prisma/client"
 import ArticlesLayout from "./articles/my_layout";
 import { SingletonStorage } from "~/client/SingletonStorage";
 

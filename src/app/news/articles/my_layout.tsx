@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Box, Grid } from "@mui/material";
-import { type Article } from "~/types";
+import { type articles as Article } from "@prisma/client"
 import { ArticleCard } from "./article_card";
 
 type MyProps = {

@@ -1,6 +1,6 @@
 import { Button, CircularProgress, Stack, TextField } from "@mui/material";
 import { useFormStatus } from "react-dom";
-import { type PromptTemplate } from "~/types";
+import { type prompttemplate as PromptTemplate } from "@prisma/client"
 import { useState } from "react";
 import { changePromptTemplateName, deletePromptTemplate } from "./actions";
 

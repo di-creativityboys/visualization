@@ -7,12 +7,13 @@ import {
     AccordionDetails,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { type Prompt, type PromptTemplate } from "~/types";
-import { OutputTab } from "../components/generate_tab/output/output_tab";
+import { type Prompt } from "~/types";
+import { type prompttemplate as PromptTemplate } from "@prisma/client";
 import { useState, type SyntheticEvent } from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
 import TemplatePage from "./template/template_page";
 import { PromptTab } from "./prompt/prompt";
+import { OutputTab } from "./output/output_page";
 
 type MyProps = {
     promptTemplates: PromptTemplate[];
@@ -39,7 +40,7 @@ export default function RecommendationLayout({ promptTemplates }: MyProps) {
 
             setPromptPreview(prompt);
             setPrompt(SingletonStorage.getInstance().prompt);
-            setTemplateName(SingletonStorage.getInstance().templateName)
+            setTemplateName(SingletonStorage.getInstance().templateName);
         };
 
     return (
@@ -81,7 +82,7 @@ export default function RecommendationLayout({ promptTemplates }: MyProps) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <PromptTab prompt={prompt} key={promptPreview}/>
+                    <PromptTab prompt={prompt} key={promptPreview} />
                 </AccordionDetails>
             </Accordion>
             <Accordion

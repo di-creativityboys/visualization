@@ -2,23 +2,25 @@
 
 import * as React from "react";
 import { Stack, Switch } from "@mui/material";
-import { SingletonStorage } from "~/client/SingletonStorage";
-import { teal } from '@mui/material/colors';
-import { alpha, styled } from '@mui/material/styles';
+import { teal } from "@mui/material/colors";
+import { alpha, styled } from "@mui/material/styles";
+import { useMyClientStore } from "~/client/client_store";
 
 type MyProps = {
     children?: React.ReactNode;
 };
 
 export default function ApiSwitchLayout({}: MyProps) {
-    const [checked, setChecked] = React.useState(false);
+    const apiVersion = useMyClientStore((state) => state.apiVersion);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
-        if(event.target.checked){
-            SingletonStorage.getInstance().apiVersion = 2;
-        }else {
-            SingletonStorage.getInstance().apiVersion = 1;
+    const setApiVersion1 = useMyClientStore((state) => state.setApiVersion1);
+    const setApiVersion2 = useMyClientStore((state) => state.setApiVersion2);
+
+    const handleChange = (_: React.ChangeEvent<HTMLInputElement>) => {
+        if (apiVersion === 1) {
+            setApiVersion2();
+        } else {
+            setApiVersion1();
         }
     };
 
@@ -31,7 +33,7 @@ export default function ApiSwitchLayout({}: MyProps) {
         >
             <p>API v1</p>
             <MySwitch
-                checked={checked}
+                checked={apiVersion === 2}
                 onChange={handleChange}
                 inputProps={{ "aria-label": "controlled" }}
             />
@@ -41,13 +43,16 @@ export default function ApiSwitchLayout({}: MyProps) {
 }
 
 const MySwitch = styled(Switch)(({ theme }) => ({
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: teal[600],
-      '&:hover': {
-        backgroundColor: alpha(teal[600], theme.palette.action.hoverOpacity),
-      },
+    "& .MuiSwitch-switchBase.Mui-checked": {
+        color: teal[600],
+        "&:hover": {
+            backgroundColor: alpha(
+                teal[600],
+                theme.palette.action.hoverOpacity
+            ),
+        },
     },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: teal[600],
+    "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+        backgroundColor: teal[600],
     },
-  }));
+}));
