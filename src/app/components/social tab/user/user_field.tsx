@@ -1,15 +1,14 @@
 "use client";
 
 import { Avatar, Stack, TextField } from "@mui/material";
-import React, { useState } from "react";
-import { SingletonStorage } from "~/client/SingletonStorage";
+import React from "react";
 import { UserFetch } from "./user_fetch";
 import { UserCached } from "./user_cached";
+import { useMyClientStore } from "~/client/client_store";
 
 export const UserField = () => {
-    const [username, setUsername] = useState(
-        SingletonStorage.getInstance().twitterUserName
-    );
+    const activeUser = useMyClientStore((state) => state.activeUser);
+    const setActiveUser = useMyClientStore((state) => state.setActiveUser);
 
     return (
         <>
@@ -19,7 +18,7 @@ export const UserField = () => {
                 alignItems="center"
                 spacing={2}
             >
-                <Avatar alt="Remy Sharp" src="images/woman.jpg"></Avatar>
+                <Avatar alt="Remy Sharp" src={activeUser?.avatar ?? "images/woman.jpg"}></Avatar>
                 <TextField
                     id="user"
                     name="user"
@@ -27,14 +26,9 @@ export const UserField = () => {
                     required
                     label="Twitter Username"
                     variant="outlined"
-                    value={username}
+                    value={activeUser?.username}
                     onChange={(e) => {
-                        setUsername(e.target.value);
-                        SingletonStorage.getInstance().twitterUserName =
-                            e.target.value;
-                        console.log(
-                            SingletonStorage.getInstance().twitterUserName
-                        );
+                        setActiveUser({username: e.target.value, avatar: null});
                     }}
                     sx={{ flexGrow: 1 }}
                 />
@@ -44,8 +38,8 @@ export const UserField = () => {
                 alignItems="stretch"
                 spacing={1}
             >
-                <UserFetch username={username} />
-                <UserCached username={username} />
+                <UserFetch username={activeUser?.username ?? ""} />
+                <UserCached username={activeUser?.username ?? ""} />
             </Stack>
         </>
     );

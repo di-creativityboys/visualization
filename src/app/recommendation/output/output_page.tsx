@@ -14,6 +14,7 @@ import { SingletonStorage } from "~/client/SingletonStorage";
 import { LanguageModel, WebSocketState } from "~/types";
 import { useWebSocketStore } from "~/client/client_store";
 import { PingLLMServerPage } from "./ping_llm_server_page";
+import { pingLLMServer } from "./ping";
 
 export const OutputTab = () => {
     const response = useWebSocketStore((state) => state.response);
@@ -35,6 +36,11 @@ export const OutputTab = () => {
     }
 
     openWebSocket();
+
+    const setHomeServerStatus = useWebSocketStore.getState().setHomeServerStatus;
+    const setUniServerStatus = useWebSocketStore.getState().setUniServerStatus;
+    pingLLMServer({name: "home", statusFunction: setHomeServerStatus, address: "ws://asdufsfd.dynv6.net:5000"});
+    pingLLMServer({name: "uni", statusFunction: setUniServerStatus, address: "ws://asdufsfd.dynv6.net:5001"});
 
     return (
         <Stack spacing={1}>

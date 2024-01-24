@@ -9,19 +9,19 @@ import {
 import React from "react";
 import { SingletonStorage } from "~/client/SingletonStorage";
 import { type articles as Article } from "@prisma/client";
+import { useMyClientStore } from "~/client/client_store";
 
 type ArticleCardProps = {
     article: Article;
-    activeCard: number;
-    setActiveCard: (newValue: number) => void;
 };
 
-export const ArticleCard = ({
-    article,
-    activeCard,
-    setActiveCard,
-}: ArticleCardProps) => {
-    const isActiveCard = activeCard == article.id;
+export const ArticleCard = ({ article }: ArticleCardProps) => {
+    const activeArticle = useMyClientStore((state) => state.activeArticle);
+    const setActiveArticle = useMyClientStore(
+        (state) => state.setActiveArticle
+    );
+
+    const isActiveCard: boolean = activeArticle === article.id;
 
     const timestamp =
         article.uploadtimestamp?.toISOString() ??
@@ -32,12 +32,14 @@ export const ArticleCard = ({
             sx={{
                 display: "flex",
                 maxHeight: "10vh",
-                backgroundColor: isActiveCard ? "#aaa" : null,
+                backgroundColor: isActiveCard ? "#607D8B" : null,
+                transition: "300ms",
+                color: isActiveCard ? "white" : null,
             }}
         >
             <CardActionArea
                 onClick={(_) => {
-                    setActiveCard(article.id);
+                    setActiveArticle(article.id);
                     SingletonStorage.getInstance().selectedArticle = article;
                 }}
                 sx={{
@@ -67,7 +69,12 @@ export const ArticleCard = ({
                         <Typography component="div" variant="h5">
                             {article.headline ?? ""}
                         </Typography>
-                        <Typography variant="subtitle2" color="text.secondary">
+                        <Typography
+                            variant="subtitle2"
+                            sx={{
+                                color: isActiveCard ? "white" : null,
+                            }}
+                        >
                             {timestamp} from {article.source ?? ""}
                         </Typography>
                     </CardContent>

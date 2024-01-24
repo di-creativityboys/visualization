@@ -16,7 +16,6 @@ export class SingletonStorage {
     selectedTweets: Set<Tweet>;
     selectedArticle: Article | null;
     selectedTopic: number | null; //topic id
-    twitterUserName: string;
     prompt: Prompt;
     templateName: string;
     apiVersion: number;
@@ -29,7 +28,6 @@ export class SingletonStorage {
         this.selectedTweets = new Set();
         this.selectedArticle = null;
         this.selectedTopic = null;
-        this.twitterUserName = "";
         this.tweets_downloaded = new Set();
         this.prompt = {text0: "", text1: "", text2: "", news: "", tweets: ""}
         this.templateName = "";

@@ -68,8 +68,9 @@ export default function TweetItem({ tweet }: TweetItemProps) {
                     secondary={
                         <Typography
                             sx={{
-                                color: checked ? "white" : "",
+                                color: checked ? "white" : null,
                                 fontSize: "0.8rem",
+                                overflowWrap: "break-word",
                             }}
                         >
                             {tweet.rawcontent}

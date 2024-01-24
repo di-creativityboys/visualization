@@ -2,16 +2,19 @@
 
 import * as React from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { type articles as Article } from "@prisma/client"
+import { type articles as Article } from "@prisma/client";
 import ArticlesLayout from "./articles/my_layout";
 import { SingletonStorage } from "~/client/SingletonStorage";
+import { type Cluster } from "~/types";
+import TopicsLayout from "./topics/my_layout";
 
 type MyProps = {
     children?: React.ReactNode;
     articles: Article[];
+    cluster: Cluster[];
 };
 
-export default function NewsLayout({  articles }: MyProps) {
+export default function NewsLayout({ articles, cluster }: MyProps) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -34,9 +37,11 @@ export default function NewsLayout({  articles }: MyProps) {
                     <Tab label="Topics" {...a11yProps(1)} />
                 </Tabs>
             </Box>
-            {
-                value === 0 ? <ArticlesLayout articles={articles} /> : <div>Item Two</div>
-            }
+            {value === 0 ? (
+                <ArticlesLayout articles={articles} />
+            ) : (
+                <TopicsLayout cluster={cluster} />
+            )}
         </>
     );
 }

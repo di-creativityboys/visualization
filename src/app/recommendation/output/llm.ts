@@ -11,24 +11,26 @@ const setResponse = useWebSocketStore.getState().setResponse;
 export const openWebSocket = () => {
     "use client";
 
+    if (typeof window === "undefined") return;
     if (webSocket != null) return;
 
     webSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
 
     webSocket.onopen = (_) => {
-        console.log("Connected to web socket");
+        console.log("Connected to web socket llm");
         setWebSocketState(WebSocketState.Ready);
     };
     webSocket.onclose = (_) => {
-        console.log("web socket closed");
+        console.log("web socket closed llm");
         setWebSocketState(WebSocketState.Disconnected);
     };
     webSocket.onerror = (event) => {
-        console.log("web socket error");
+        console.log("web socket error llm");
         console.log(event);
     };
 
     webSocket.onmessage = (event) => {
+        console
         console.log(event);
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

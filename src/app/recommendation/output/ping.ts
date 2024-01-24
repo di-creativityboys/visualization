@@ -1,36 +1,48 @@
-import { useWebSocketStore } from "~/client/client_store";
+"use client";
 
-const setHomeServerStatus = useWebSocketStore.getState().setHomeServerStatus;
+import { WebSocketState } from "~/types";
 
-export const pingLLMServer = () => {
-    const webSocket: WebSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
+type pingLLMType = {
+    name: string;
+    statusFunction: (serverStatus: WebSocketState) => void;
+    address: string;
+};
+
+export const pingLLMServer = ({ name, statusFunction, address }: pingLLMType) => {
+    "use client";
+
+    if (typeof window === "undefined") return;
+
+    const webSocket: WebSocket = new WebSocket(address);
 
     webSocket.onopen = (_) => {
-        console.log("Connected to web socket");
+        console.log("Connected to web socket ping" + name);
+        statusFunction(WebSocketState.Disconnected);
         webSocket.send("ping");
     };
     webSocket.onclose = (_) => {
-        console.log("web socket closed");
-        setHomeServerStatus("Offline");
+        console.log("web socket closed ping" + name);
+        //setHomeServerStatus(WebSocketState.Disconnected);
     };
     webSocket.onerror = (event) => {
-        console.log("web socket error");
+        console.log("web socket error ping" + name);
         console.log(event);
-        setHomeServerStatus("Error");
+        statusFunction(WebSocketState.Disconnected);
 
         webSocket.close();
     };
 
     webSocket.onmessage = (event) => {
+        console.log("message recieved ping" + name);
         console.log(event);
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const raw: string = event.data;
 
         if (raw === "ping") {
-            setHomeServerStatus("Online");
+            statusFunction(WebSocketState.Ready);
         } else {
-            setHomeServerStatus("Error");
+            statusFunction(WebSocketState.Disconnected);
         }
 
         webSocket.close();
