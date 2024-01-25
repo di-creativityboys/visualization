@@ -40,7 +40,7 @@ export const OutputTab = () => {
     const setHomeServerStatus = useWebSocketStore.getState().setHomeServerStatus;
     const setUniServerStatus = useWebSocketStore.getState().setUniServerStatus;
     pingLLMServer({name: "home", statusFunction: setHomeServerStatus, address: "ws://asdufsfd.dynv6.net:5000"});
-    pingLLMServer({name: "uni", statusFunction: setUniServerStatus, address: "ws://asdufsfd.dynv6.net:5001"});
+    pingLLMServer({name: "uni", statusFunction: setUniServerStatus, address: "ws://10.14.29.202:5000"});
 
     return (
         <Stack spacing={1}>

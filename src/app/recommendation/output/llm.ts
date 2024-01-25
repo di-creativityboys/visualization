@@ -2,6 +2,7 @@
 
 import { useWebSocketStore } from "~/client/client_store";
 import { type LanguageModel, WebSocketState } from "~/types";
+import { env } from "~/env.mjs";
 
 let webSocket: WebSocket;
 
@@ -14,10 +15,11 @@ export const openWebSocket = () => {
     if (typeof window === "undefined") return;
     if (webSocket != null) return;
 
-    webSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
+    //webSocket = new WebSocket("ws://asdufsfd.dynv6.net:5000");
+    webSocket = new WebSocket(env.NEXT_PUBLIC_LLM_WEBSOCKET_URL);
 
     webSocket.onopen = (_) => {
-        console.log("Connected to web socket llm");
+        console.log("Connected to web socket llm " + env.NEXT_PUBLIC_LLM_WEBSOCKET_URL);
         setWebSocketState(WebSocketState.Ready);
     };
     webSocket.onclose = (_) => {
