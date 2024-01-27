@@ -8,8 +8,7 @@ datasource db {
 }
 
 model articles {
-  id                Int       @id @default(autoincrement())
-  urlid             String?
+  urlid             String    @id
   headline          String?
   content           String?
   authors           String[]
@@ -21,6 +20,14 @@ model articles {
   topic             String?
   clusterid         Int?
   clustertopic      String?
+}
+
+model prompttemplate {
+  id    Int     @id @default(autoincrement())
+  name  String? @db.VarChar
+  text0 String? @db.VarChar
+  text1 String? @db.VarChar
+  text2 String? @db.VarChar
 }
 
 model tweets {
@@ -49,12 +56,4 @@ model tweets {
   profileimageurl   String?   @db.VarChar
   clusterid         Int?
   clustertopic      String?
-}
-
-model prompttemplate {
-  id    Int     @id @default(autoincrement())
-  name  String? @db.VarChar
-  text0 String? @db.VarChar
-  text1 String? @db.VarChar
-  text2 String? @db.VarChar
 }

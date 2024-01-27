@@ -21,7 +21,7 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
         (state) => state.setActiveArticle
     );
 
-    const isActiveCard: boolean = activeArticle === article.id;
+    const isActiveCard: boolean = activeArticle === article.urlid;
 
     const timestamp =
         article.uploadtimestamp?.toISOString() ??
@@ -39,7 +39,7 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
         >
             <CardActionArea
                 onClick={(_) => {
-                    setActiveArticle(article.id);
+                    setActiveArticle(article.urlid);
                     SingletonStorage.getInstance().selectedArticle = article;
                 }}
                 sx={{

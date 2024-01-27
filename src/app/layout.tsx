@@ -4,6 +4,9 @@ import { Inter } from "next/font/google";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { type ReactNode } from "react";
 import ApiSwitchLayout from "./components/menu/myLayout";
+import { FetchBBCButton } from "./components/menu/fetchbuttons/fetch_bbc_button";
+import { ReclusterButton } from "./components/menu/fetchbuttons/fetch_cluster_button";
+import { FetchCNNButton } from "./components/menu/fetchbuttons/fetch_cnn_button";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -37,6 +40,9 @@ export default function RootLayout({
                             >
                                 Tweet Recommender
                             </Typography>
+                            <FetchBBCButton />
+                            <FetchCNNButton />
+                            <ReclusterButton />
                             <ApiSwitchLayout />
                         </Toolbar>
                     </AppBar>

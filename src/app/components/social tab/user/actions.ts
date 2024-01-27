@@ -1,9 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { env } from "~/env.mjs";
-import { singletonServer } from "~/server/SingletonServer";
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function getCachedUser(formData: FormData) {
@@ -17,9 +17,8 @@ export async function getCachedUser(formData: FormData) {
         user: formData.get("user"),
     });
 
-    singletonServer.twitterUserName = data.user;
-    console.log("1 " + singletonServer.twitterUserName);
     revalidatePath("/");
+    redirect(`/?user=${data.user}`);
 }
 
 export async function fetchUser(formData: FormData) {
@@ -35,13 +34,8 @@ export async function fetchUser(formData: FormData) {
         apiVersion: formData.get("apiVersion"),
     });
 
-    singletonServer.twitterUserName = data.user;
-    console.log("1 " + singletonServer.twitterUserName);
-
     try {
-        // host.docker.internal
-
-        if(data.apiVersion === "1") {
+        if (data.apiVersion === "1") {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const response = await fetch(
                 `${env.DATA_APP_URL}/twitter/${data.user}`,
@@ -59,11 +53,8 @@ export async function fetchUser(formData: FormData) {
             );
         }
 
-        
-
         revalidatePath("/");
-        console.log("geschafft");
-        return { message: "Added" };
+        redirect(`/?user=${data.user}`);
     } catch (e) {
         console.log("gefailed");
         console.log(e);

@@ -7,8 +7,8 @@ interface MyClientStore {
     setApiVersion1: () => void;
     activeTopic: string | null;
     setActiveTopic: (activeTopicId: string | null) => void;
-    activeArticle: number | null;
-    setActiveArticle: (activeArticleId: number | null) => void;
+    activeArticle: string | null;
+    setActiveArticle: (activeArticleId: string | null) => void;
     activeUser: User | null;
     setActiveUser: (activeUser: User | null) => void;
 }
@@ -23,7 +23,7 @@ export const useMyClientStore = create<MyClientStore>((set) => ({
     setActiveTopic: (activeTopic: string | null) =>
         set((_: MyClientStore) => ({ activeTopic })),
     activeArticle: null,
-    setActiveArticle: (activeArticle: number | null) =>
+    setActiveArticle: (activeArticle: string | null) =>
         set((_: MyClientStore) => ({ activeArticle })),
     activeUser: null,
     setActiveUser: (activeUser: User | null) =>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Stack, TextField } from "@mui/material";
+import { Stack, TextField } from "@mui/material";
 import React from "react";
 import { UserFetch } from "./user_fetch";
 import { UserCached } from "./user_cached";
@@ -18,7 +18,6 @@ export const UserField = () => {
                 alignItems="center"
                 spacing={2}
             >
-                <Avatar alt="Remy Sharp" src={activeUser?.avatar ?? "images/woman.jpg"}></Avatar>
                 <TextField
                     id="user"
                     name="user"

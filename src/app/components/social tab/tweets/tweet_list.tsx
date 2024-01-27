@@ -1,13 +1,13 @@
 import React from "react";
 import { db } from "~/server/db";
-import { singletonServer } from "~/server/SingletonServer";
 import TweetsLayout from "./my_layout";
 
-export const TweetList = async () => {
+export const TweetList = async ({ userParam }: { userParam: string }) => {
     const tweets = await db.tweets.findMany({
         where: {
             tweetuser: {
-                equals: singletonServer.twitterUserName,
+                equals: userParam,
+                mode: "insensitive",
             },
         },
         orderBy: [
@@ -17,5 +17,5 @@ export const TweetList = async () => {
         ],
     });
 
-    return <TweetsLayout tweets={tweets}/>
+    return <TweetsLayout tweets={tweets} />;
 };

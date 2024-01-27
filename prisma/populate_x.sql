@@ -1,48 +1,11 @@
-INSERT INTO tweets (
-    id,
-    tweeturl,
-    publishdatetime,
-    tweetuser,
-    languagecode,
-    rawcontent,
-    replycount,
-    retweetcount,
-    likecount,
-    quotecount,
-    hashtags,
-    cashtags,
-    mentionedusers,
-    linksintweet,
-    viewcount,
-    retweetedtweetid,
-    quotedtweetid,
-    inreplytouser,
-    photolinks,
-    videolinks,
-    animatedlinks,
-    scrapingtimestamp
-  )
-VALUES (
-    1235236,
-    'tweeturl:character varying',
-    '2011-01-01T03:33:31.000Z',
-    'tweetuser:character varying',
-    'languagecode:character varying',
-    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores',
-    4,
-    45,
-    456,
-    4567,
-    array['myHashtag'],
-    array['myCashtag'],
-    array['barackobama'],
-    array['https://google.com'],
-    235,
-    67,
-    76,
-    'inreplytouser:character varying',
-    NULL,
-    NULL,
-    NULL,
-    '2011-01-01T03:33:31.000Z'
-  );
+SELECT 
+  column_name, 
+  data_type, 
+  character_maximum_length, 
+  is_nullable, 
+  column_default 
+FROM 
+  information_schema.columns 
+WHERE 
+  table_name = 'articles';
+

@@ -8,11 +8,21 @@ import NewsPage from "./news/news";
 
 export const dynamic = "force-dynamic";
 
-export default function Home() {
+export default function Home({
+    searchParams,
+}: {
+    searchParams: Record<string, string | string[] | undefined>;
+}) {
+
+    let userParam = "";
+    if (typeof searchParams.user === "string"){
+        userParam = searchParams.user;
+    }
+
     return (
-        <Grid container spacing={2} mt={1} alignItems="stretch">
+        <Grid container spacing={2} mt={0} alignItems="stretch">
             <Grid item xs={3}>
-                <SocialTab />
+                <SocialTab userParam={userParam} />
             </Grid>
             <Grid item xs={6}>
                 <Suspense fallback={<div>Loading...</div>}>
