@@ -23,9 +23,23 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
 
     const isActiveCard: boolean = activeArticle === article.urlid;
 
-    const timestamp =
+    let timestamp =
         article.uploadtimestamp?.toISOString() ??
-        article.scrapingtimestamp.toISOString() + "(scraped)";
+        article.scrapingtimestamp.toISOString();
+    try {
+        timestamp = new Date(timestamp).toLocaleDateString("en-US", {
+            // weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+            hour: "numeric",
+            minute: "numeric",
+        });
+    } catch (error) {
+        timestamp =
+            article.uploadtimestamp?.toISOString() ??
+            article.scrapingtimestamp.toISOString() + "(scraped)";
+    }
 
     return (
         <Card

@@ -5,6 +5,15 @@ import { type Cluster } from "~/types";
 
 export default async function NewsPage() {
     const articlesDB: Article[] = await db.articles.findMany({
+        take: 100,
+        where: {
+            imageurl: {
+                not: null,
+            },
+            headline: {
+                not: null,
+            },
+        },
         orderBy: [
             {
                 scrapingtimestamp: "desc",
@@ -18,6 +27,16 @@ export default async function NewsPage() {
             clustertopic: true,
             imageurl: true,
         },
+        take: 80,
+        where: {
+            imageurl: {
+                not: null,
+            },
+            headline: {
+                not: null,
+            },
+        },
+        distinct: ["clustertopic"],
     });
 
     return <NewsLayout articles={articlesDB} cluster={clustersDB} />;

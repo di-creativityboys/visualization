@@ -14,6 +14,7 @@ import { SingletonStorage } from "~/client/SingletonStorage";
 import TemplatePage from "./template/template_page";
 import { PromptTab } from "./prompt/prompt";
 import { OutputTab } from "./output/output_page";
+import { ImageTab } from "./image/image_tab";
 
 type MyProps = {
     promptTemplates: PromptTemplate[];
@@ -97,10 +98,26 @@ export default function RecommendationLayout({ promptTemplates }: MyProps) {
                     <Typography sx={{ width: "33%", flexShrink: 0 }}>
                         Recommendation
                     </Typography>
-                    <Typography sx={{ color: "text.secondary" }}>t</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <OutputTab />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={expanded === "imagePanel"}
+                onChange={handleChange("imagePanel")}
+            >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2bh-content"
+                    id="panel2bh-header"
+                >
+                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Image
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <ImageTab />
                 </AccordionDetails>
             </Accordion>
         </>

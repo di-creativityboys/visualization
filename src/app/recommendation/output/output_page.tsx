@@ -97,7 +97,7 @@ export const OutputTab = () => {
                 disabled={true}
                 sx={{ backgroundColor: "#009688" }}
             >
-                Post to X
+                Get image
             </Button>
         </Stack>
     );
